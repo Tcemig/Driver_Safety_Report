@@ -1,0 +1,33 @@
+# VS Code settings
+.vscode/
+
+# Windows system files
+Thumbs.db
+Desktop.ini
+
+# Node.js dependencies
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+
+# Mac system files (if you ever use a Mac)
+.DS_Store
+
+# Logs
+*.log
+
+# Environment files
+.env
+
+# Build output
+dist/
+build/
+out/
+
+# Temporary files
+*.tmp
+*.swp
+
+/DIO Groups/
