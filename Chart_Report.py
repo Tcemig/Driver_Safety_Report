@@ -32,9 +32,6 @@ drop_behaviors_list = [
 NonPriority_Be_Totals_df = Behaviors_df
 Behaviors_df = Behaviors_df.drop(drop_behaviors_list, axis=1)
 
-print((Behaviors_df.loc[0, 'Date']))
-print((safety_monitoring_df.loc[0, 'Week Starting']))
-
 # Overview of Program Preformance
 overviewOfProgramPreformance_df = Behaviors_df[['Date', 'Week', 'Year', 'Total']] # Behaviors']]
 overviewOfProgramPreformance_df['Active ERs'] = 0

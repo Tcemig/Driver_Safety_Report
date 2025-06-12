@@ -2,9 +2,7 @@ import pandas as pd
 import os
 import xlwings
 import re
-import numpy as np
 import datetime as dt
-import sqlite3
 
 # Following Distance: â‰¥ 1 sec to < 2 sec
 
@@ -73,8 +71,6 @@ for DATE in os.listdir('Weekly Event Worksheets'):
     Unique_Names = LYTX_DataSet_2['Driver'].unique()
     Unique_Names_num = len(Unique_Names)
     UDwE_df.loc[(len(UDwE_df.index)-1, 'Unique Drivers')] = Unique_Names_num
-
-
 
     for col in ['COV', 'Contractor', 'LineHaul']:
         if col == 'COV':
@@ -212,12 +208,8 @@ for index, row in COV_df.iterrows():
     temp_contractor_df = Contractor_df[Contractor_df['Week'] == temp_week]
     temp_linehaul_df = Linehaul_df[Linehaul_df['Week'] == temp_week]
     temp_week_df = pd.concat([temp_cov_df, temp_contractor_df, temp_linehaul_df], axis=0)
-    # temp_week_df['Date'] = ""
     sum_list = [temp_monthYear, temp_date, temp_week, temp_year]
     for col in (Behaviors_df.columns)[4:]:
-        # if col == "Date":
-        #     sum_list.append(dt.datetime.strptime(f"{temp_week[:5]}.{temp_year}", "%m.%d.%Y"))
-        # else:
         sum_list.append(temp_week_df[col].sum())
     temp_week_df.loc[len(temp_week_df)] = sum_list 
     temp_week_df = temp_week_df.iloc[-1:, :]
@@ -235,9 +227,6 @@ NearCollisions_df = Behaviors_df[[
         "Mirror Use",
         "Intersection Awareness",
         "Late Response",
-        # "Incomplete Stop",
-        # "Following Distance: > 1 sec to < 2 sec",
-        # "Other Concern",
         "Red Light",
         "Drowsy",
         "Following Distance: < 1 second",
@@ -263,7 +252,6 @@ Behaviors_df = Behaviors_df.iloc[:-1, :]
 Behaviors_df['Total Behaviors'] = Behaviors_df.iloc[:, 4:].sum(axis=1)
 
 # Near Collisions Behaviors profile
-# NearCollisions_df = NearCollisions_df.iloc[:, :]
 NearCollisions_df = NearCollisions_df.reset_index(drop=True)
 sum_list = ["0", "0", "0"]
 for col in (NearCollisions_df.columns)[3:]:
@@ -293,9 +281,6 @@ for index, row in LYTX_Vehicles_df.iterrows():
     users_group = users_group.reset_index(drop=True)
     try:
         users_group = users_group.loc[0, "Roles (Group)"]
-        # users_group = list(re.split("[(),]", users_group))
-        # for i in range(len(users_group)):
-        #     users_group[i] = users_group[i].strip()
         if "Contractor" in users_group:
             LYTX_Vehicles_df.loc[index, "Group"] = "Contractor"
     except KeyError:

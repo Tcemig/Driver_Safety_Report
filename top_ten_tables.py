@@ -1,11 +1,7 @@
 import pandas as pd
-import numpy as np
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
-from plotly.colors import n_colors
-from statistics import mean
-import datetime as dt
-import json
+
 
 file = "05.03-05.09 2025"
 
@@ -116,7 +112,7 @@ fig.update_layout(
     width=1800,
     title=dict(
         text=f"Top 10 Behaviors by Vehicle From LYTX - {file}",
-        font=dict(size=24)  # Adjust the font size here
+        font=dict(size=24)
     ),
     showlegend=False,
 )
